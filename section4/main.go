@@ -104,4 +104,35 @@ func main() {
 	fmt.Println(fl64_2)
 	fmt.Printf("i = %T\n", i_2)
 	fmt.Printf("fl64 = %T\n", fl64_2)
+
+	i5 := int(fl64_2)
+	fmt.Print("i5 = %T\n", i5)
+
+	fl6 := 10.5
+	i6 := int(fl6)
+
+	fmt.Print("i6= %T\n", i6)
+	fmt.Print(i6, "\n")
+
+	// 試行錯誤らん
+	fmt.Printf("%Tと%Tと%T", 1, 2, 3)
+	fmt.Print("\n")
+	fmt.Print(1, 2, 3)
+	fmt.Print("\n")
+
+	name := "ALice"
+	age := 30
+	fmt.Printf("名前は%vです。年齢は%vです", name, age)
+
+	fmt.Print("\n")
+	var sss2 string = "abcABCHello"
+	fmt.Println(sss2[0])
+	fmt.Println(sss2[1])
+	fmt.Println(sss2[2])
+	fmt.Println(string(sss2[0]))
+	fmt.Println(string(sss2[1]))
+	fmt.Println(string(sss2[2]))
+	fmt.Println(sss2[3])
+	fmt.Println(sss2[4])
+	fmt.Println(sss2[5])
 }
