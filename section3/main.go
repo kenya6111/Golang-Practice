@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+var i11 int = 10
+
 func outer() {
 	fmt.Println(111)
 }
@@ -47,6 +49,22 @@ func main() {
 	fmt.Print(x, y)
 	fmt.Print("\n")
 	outer()
+
+	fmt.Print("\n")
+	var aaa string
+	fmt.Print("\n")
+	var bbb int
+	fmt.Print(aaa)
+	fmt.Print(bbb)
+
+	fmt.Print("\n")
+	i10 := 300
+	fmt.Print(i10)
+	fmt.Print("\n")
+	fmt.Printf("i10=%T", i10)
+
+	i10 = 111
+	fmt.Print(i11)
 
 	// 	使い分け
 	// := を使う場合

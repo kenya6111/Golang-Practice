@@ -1,4 +1,125 @@
 # Golang-Practice
+- 明示的な定義
+  - varを利用して変数を定義する場合、型の指定が必要です。varを利用すると複数の異なる型の変数を () で囲み、まとめて定義できます。
+  - デフォルト値ですが、数値系は 0、文字列は 空文字、ポインタは nil になっている
+  ```go
+  	var (
+      i2 int    = 200
+      s2 string = "golung"
+    )
+
+    fmt.Println(i2, s2)// 200golung
+  ```
+- 暗黙的な定義
+  - 型の指定をしないでも良い。
+  - 「:=」で定義する
+  ```go
+  	i10 := 300
+    fmt.Print(i10)// 300
+    fmt.Print("\n")
+    fmt.Printf("i10=%T", i10)// int
+
+    // 一度 :=で定義した変数には異なる型の値は代入できない
+    i10="abc"// cannot use "aaaaa" (untyped string constant) as int value in assignmentcompilerIncompatibleAssign
+  ```
+  - :=は関数内でしか定義できない
+    - 例えばグローバルで :=で変数定義すると、以下のエラー分がでる
+    - section3/main.go:5:1: syntax error: non-declaration statement outside function body
+    - 逆に明示的な定義であればグローバルで定義できる
+    - 基本的に関数内か関数が以下で使い分けるが、できれば明示的あ定義を基本使うこと
+- int型
+  - int8: 符号付き 8ビット整数
+    - 取り得る値: -128 ～ 127
+    - メモリ使用量: 1バイト
+  - int16: 符号付き 16ビット整数
+    - 取り得る値: -32768 ～ 32767
+    - メモリ使用量: 2バイト
+
+  - int32: 符号付き 32ビット整数
+    - 取り得る値: -2,147,483,648 ～ 2,147,483,647
+    - メモリ使用量: 4バイト
+
+  - int64: 符号付き 64ビット整数
+    - 取り得る値: -9,223,372,036,854,775,808 ～ 9,223,372,036,854,775,807
+    - メモリ使用量: 8バイト
+  - Go には int8, int16, int32, int64 とは別に int という型もあります。
+    - int はその環境(実行環境)の デフォルトのワードサイズ になります
+    - 32ビット環境なら int は 32ビット
+    - 64ビット環境なら int は 64ビット
+  - 使い分け
+    - 取り扱う数値の範囲が非常に大きい or 小さいことが明確な場合
+    - → int64 や int8 などを明示的に使う
+
+  - 普通に整数演算をするだけで、特に気にする必要がない場合
+    - → int を使えば OK (Go においては、ほとんどの場合 int で十分)
+
+- float
+  - 
+- byte型
+  ```go
+
+	byteA := []byte{72, 73}
+	fmt.Println(byteA) // [72 73]が出る
+
+	fmt.Println(string(byteA)) // HI が出る
+
+  c := []byte("HI") // バイト配列に直す
+	fmt.Println(c)    // [72 73]が出力される
+  ```
+- 配列型
+  ```go
+	// GOの配列型は、あとから要素数を変更できない。増減できない
+	fmt.Println("----------")
+	var arr1 [3]int
+	fmt.Println(arr1)        // [0 0 0]
+	fmt.Printf("%T\n", arr1) // [3]int
+
+	var arr2 [3]string = [3]string{"A", "B"}
+	fmt.Println(arr2) // [A B ]
+
+	arr3 := [3]int{1, 2, 3}
+	fmt.Println(arr3) // [1 2 3]
+
+	arr4 := [...]string{"C", "D"}
+	fmt.Println(arr4)        // [C D]
+	fmt.Printf("%T\n", arr4) // [2]string
+
+	fmt.Println(arr1[0]) // 0
+	fmt.Println(arr2[0]) // A
+
+	arr2[2] = "E"
+	fmt.Println(arr2[2]) // E
+
+	fmt.Println(len(arr1)) // 3
+  ```
+- interface
+  ```go
+  	var x interface{} // あらゆる型と互換性がある
+    fmt.Println(x)    // nil 初期値はnilとなっている。pythonでいうところのNoneになる。
+
+    x = "aaa"
+    fmt.Println(x) /// aaa
+    x = 111
+    fmt.Println(x) // 111
+    x = true
+    fmt.Println(x) // true
+
+    x = [3]int{1, 2, 3}
+    fmt.Println(x) //[1 2 3]
+  ```
+  - あくまでinterface型はすべての型を汎用的に表す手段であって、演算の対象としては利用できないことに注意。
+- 型変換
+  ```go
+  	var i_3 int = 1
+    fmt.Printf("%T\n", i_3) //int
+    fl64_2 := float64(i_3)
+    fmt.Println(fl64_2)        // 1
+    fmt.Printf("%T\n", fl64_2) // float64
+
+    inti_3 := int(fl64_2)
+    fmt.Println(inti_3)      // 1
+    fmt.Printf("%T", inti_3) // int
+  ```
 - fmt.Print()
   - 与えられた引数をスペースで区切って標準出力に出力する。末尾に改行は追加されない
   ```go

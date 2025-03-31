@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func outer() {
 	fmt.Println(111)
@@ -58,81 +61,59 @@ func main() {
 
 	fmt.Println(string(c)) //
 
+	// GOの配列型は、あとから要素数を変更できない。増減できない
+	fmt.Println("----------")
 	var arr1 [3]int
-	fmt.Println(arr1)
-	fmt.Printf("%T\n", arr1)
+	fmt.Println(arr1)        // [0 0 0]
+	fmt.Printf("%T\n", arr1) // [3]int
 
 	var arr2 [3]string = [3]string{"A", "B"}
-	fmt.Println(arr2)
+	fmt.Println(arr2) // [A B ]
 
 	arr3 := [3]int{1, 2, 3}
-	fmt.Println(arr3)
+	fmt.Println(arr3) // [1 2 3]
 
 	arr4 := [...]string{"C", "D"}
-	fmt.Println(arr4)
-	fmt.Printf("%T\n", arr4)
+	fmt.Println(arr4)        // [C D]
+	fmt.Printf("%T\n", arr4) // [2]string
 
-	fmt.Println(arr1[0])
-	fmt.Println(arr2[0])
+	fmt.Println(arr1[0]) // 0
+	fmt.Println(arr2[0]) // A
 
 	arr2[2] = "E"
-	fmt.Println(arr2[2])
+	fmt.Println(arr2[2]) // E
 
-	fmt.Println(len(arr1))
+	fmt.Println(len(arr1)) // 3
 
-	// 	【Goの配列型】
-	// 他のプログラミング言語の配列型になれていると、若干奇妙かもしれませんが、Goの配列型は要素数を変更できません。
-
-	// 要素の追加などを行う場合は、後のレクチャーで登場するスライス型を使います。
-
-	// 配列型　＝　要素数を変更できない。
-
-	// スライス型　＝　要素数を変更可能。
-
-	var x interface{} //インタフェース方は全ての型と互換性がある。xにあらゆる型のデータを入れれる
-	fmt.Println(x)    // <nil>が返される。PythonでいうところのNoneと同じ
-	// だが普通の演算はできない型になる
-	x = 1
-	fmt.Println(x)
+	var x interface{} // あらゆる型と互換性がある
+	fmt.Println(x)    // nil 初期値はnilとなっておりpythonでいうところのNoneになる。
 
 	x = "aaa"
-	fmt.Println(x)
+	fmt.Println(x) /// aaa
+	x = 111
+	fmt.Println(x) // 111
+	x = true
+	fmt.Println(x) // true
 
-	// 型の変換
-	var i_2 int = 1
-	fl64_2 := float64(i_2)
-	fmt.Println(fl64_2)
-	fmt.Printf("i = %T\n", i_2)
-	fmt.Printf("fl64 = %T\n", fl64_2)
+	x = [3]int{1, 2, 3}
+	fmt.Println(x) //[1 2 3]
+	// fmt.Println(x + 3)// invalid operation: x + 3 (mismatched types interface{} and int)
 
-	i5 := int(fl64_2)
-	fmt.Print("i5 = %T\n", i5)
+	var i_3 int = 1
+	fmt.Printf("%T\n", i_3) //int
+	fl64_2 := float64(i_3)
+	fmt.Println(fl64_2)        // 1
+	fmt.Printf("%T\n", fl64_2) // float64
 
-	fl6 := 10.5
-	i6 := int(fl6)
+	inti_3 := int(fl64_2)
+	fmt.Println(inti_3)        // 1
+	fmt.Printf("%T\n", inti_3) // int
 
-	fmt.Print("i6= %T\n", i6)
-	fmt.Print(i6, "\n")
+	var s_4 string = "100"
+	fmt.Printf("%T\n", s_4) // string
 
-	// 試行錯誤らん
-	fmt.Printf("%Tと%Tと%T", 1, 2, 3)
-	fmt.Print("\n")
-	fmt.Print(1, 2, 3)
-	fmt.Print("\n")
+	i, _ = strconv.Atoi(s_4)
+	fmt.Printf("%T\n", i) // int
+	fmt.Print(i)          // 100
 
-	name := "ALice"
-	age := 30
-	fmt.Printf("名前は%vです。年齢は%vです", name, age)
-
-	fmt.Print("\n")
-	var sss2 string = "abcABCHello"
-	fmt.Println(sss2[0])
-	fmt.Println(sss2[1])
-	fmt.Println(sss2[2])
-	fmt.Println(string(sss2[0]))
-	fmt.Println(string(sss2[1]))
-	fmt.Println(string(sss2[2]))
-	fmt.Println(sss2[3])
-	fmt.Println(sss2[4])
-	fmt.Println(sss2[5])
 }
