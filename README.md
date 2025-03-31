@@ -119,7 +119,48 @@
     inti_3 := int(fl64_2)
     fmt.Println(inti_3)      // 1
     fmt.Printf("%T", inti_3) // int
+
+    	var s_4 string = "100"
+      fmt.Printf("%T\n", s_4) // string
+
+      // strconvで文字列から数値に変換できる
+      i, _ = strconv.Atoi(s_4) // アンダースコアとなることで、関数から帰ってくる2つ目の値を使わないとできる。
+      fmt.Printf("%T\n", i) // int
+      fmt.Print(i)          // 100
   ```
+
+
+- 定数
+  ```go
+  // 頭文字を大文字にすると他パッケージから呼び出せる
+  const Pi = 3.14
+
+  // まとめて定数定義する
+  const (
+    URL      = "http://xxx.co.jp"
+    SiteName = "test"
+  )
+
+  // 同じ値をまとめて定数定義する
+  const (
+    A = 1
+    B
+    C
+    D = "A"
+    E
+    F
+  )
+  fmt.Println(A, B, C, D, E, F)// 1,1,1,A,A,A
+
+  // iotaは連番を生成する
+  const (
+    c0 = iota
+    c1
+    c2
+  )
+  fmt.Println(c0, c1, c2)// 0 1 2
+  ```
+
 - fmt.Print()
   - 与えられた引数をスペースで区切って標準出力に出力する。末尾に改行は追加されない
   ```go
@@ -175,3 +216,5 @@
 	// 変数の型を明示的に指定せずに、新しい変数を宣言しながら初期化する際に使われます。
   // 基本的には明示的な型指定をする明示的な定義を使った方が良いとされている
 	// 型指定をすることでバグを抑えるように元々設計された言語なので。
+
+
