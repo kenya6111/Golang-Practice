@@ -14,4 +14,15 @@ func main() {
 	n++
 	fmt.Println(n)
 
+	fmt.Println(1 == 1)
+	fmt.Println(1 == 3)
+	fmt.Println(true && true)
+	fmt.Println(true && false)
+	fmt.Println(false && false)
+	fmt.Println(false || false)
+	fmt.Println(false || true)
+	fmt.Println(true || true)
+	fmt.Println(!true)
+	fmt.Println(!false) // !で論理値を反転させることができる
+
 }

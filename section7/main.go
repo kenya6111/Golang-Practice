@@ -26,7 +26,7 @@ func NOReturn() {
 	fmt.Println("no return ")
 }
 
-func Returnfunc() func() {
+func Returnfunc() func() { // 関数を返す場合はfnuc()という型になる
 	return func() { fmt.Println("asaaaaa") }
 }
 
@@ -34,7 +34,7 @@ func CallFUnction(f func()) {
 	f()
 }
 
-func Later() func(string) string {
+func Later() func(string) string { //関数（文字列を受け取って文字列を返す）を返す関数
 	var store string
 	return func(next string) string {
 		s := store
@@ -72,7 +72,7 @@ func main() {
 
 	i6 := func(x, y int) int {
 		return x + y
-	}(4, 5)
+	}(4, 5) // 定義と同時にそのまま実行してしまえるやつ
 	fmt.Println(i6)
 
 	// 関数を返す関数

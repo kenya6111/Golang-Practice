@@ -11,12 +11,12 @@ func outer() {
 func main() {
 	var i int = 100
 	fmt.Println(i)
-	fmt.Printf("%T\n", i) // データ型がわかる。
+	fmt.Printf("%T\n", i)        // データ型がわかる。
+	fmt.Printf("%T\n", int32(i)) // ％Tは書式指定紙と呼ばれていて、型を表示するやつ
 	fmt.Printf("%T\n", int32(i))
 
 	var fl64 float64 = 2.4
 	fmt.Println(fl64)
-
 	fl := 3.2
 	fmt.Println(fl64 + fl)
 	fmt.Printf("%T, %T\n", fl64, fl)
@@ -50,6 +50,7 @@ func main() {
 	var sss string = "Hello golung"
 	fmt.Println(sss[0])         //"H"だが72が出る
 	fmt.Println(string(sss[0])) // 文字列に変換　「H」が出力
+	fmt.Println(string(sss[8])) // 文字列に変換　「H」が出力
 
 	byteA := []byte{72, 73}
 	fmt.Println(byteA) // [72 73]が出る
@@ -61,7 +62,7 @@ func main() {
 
 	fmt.Println(string(c)) //
 
-	// GOの配列型は、あとから要素数を変更できない。増減できない
+	// GOの配列型は、あとから要素数を変更できない。増減できない サイズ変更したい場合はスライスを使う
 	fmt.Println("----------")
 	var arr1 [3]int
 	fmt.Println(arr1)        // [0 0 0]
@@ -76,6 +77,7 @@ func main() {
 	arr4 := [...]string{"C", "D"}
 	fmt.Println(arr4)        // [C D]
 	fmt.Printf("%T\n", arr4) // [2]string
+	fmt.Println(len(arr4))
 
 	fmt.Println(arr1[0]) // 0
 	fmt.Println(arr2[0]) // A
@@ -85,8 +87,13 @@ func main() {
 
 	fmt.Println(len(arr1)) // 3
 
-	var x interface{} // あらゆる型と互換性がある
-	fmt.Println(x)    // nil 初期値はnilとなっておりpythonでいうところのNoneになる。
+	// 	配列型　＝　要素数を変更できない。
+
+	// スライス型　＝　要素数を変更可能。
+	var x interface{} // あらゆる型と互換性がある {}を含めて1つの型となっている
+	fmt.Println("---")
+	fmt.Println(x)
+	fmt.Println(x) // nil 初期値はnilとなっておりpythonでいうところのNoneになる。
 
 	x = "aaa"
 	fmt.Println(x) /// aaa
@@ -96,8 +103,11 @@ func main() {
 	fmt.Println(x) // true
 
 	x = [3]int{1, 2, 3}
-	fmt.Println(x) //[1 2 3]
+	x = [5]int{1, 2, 3, 4, 5}
+	fmt.Println(x) //[1 2 3 4 5]
 	// fmt.Println(x + 3)// invalid operation: x + 3 (mismatched types interface{} and int)
+	// インタフェース型はすべての型を汎用に表す手段であって、演算の対象としては利用できない
+	// 初期値はNIL
 
 	var i_3 int = 1
 	fmt.Printf("%T\n", i_3) //int

@@ -17,7 +17,7 @@ func main() {
 	var t, f bool = true, false
 	fmt.Println(t, f)
 
-	var (
+	var ( // 異なる型で定義する
 		i2 int    = 200
 		s2 string = "golung"
 	)
@@ -26,7 +26,7 @@ func main() {
 
 	var i3 int
 	var s3 string
-	fmt.Println(i3, s3)
+	fmt.Println(i3, s3) // 値を定義しないと、各型の初期値が入る
 
 	i3 = 300
 	s3 = "re go"
@@ -35,6 +35,7 @@ func main() {
 	// 暗黙的な定義（明示的な定義と比べて、型指定の必要がない）
 	//:= は、「短変数宣言 (short variable declaration)」 と呼ばれる構文です。
 	// 変数の型を明示的に指定せずに、新しい変数を宣言しながら初期化する際に使われます。
+	// 暗黙的な定義は関数の外で定義することができない
 
 	i4 := 400
 	fmt.Println(i4)
@@ -44,12 +45,14 @@ func main() {
 
 	// 基本的には明示的な型指定をする明示的な定義を使った方が良いとされている
 	// 型指定をすることでバグを抑えるように元々設計された言語なので。
+	// また型指定されている方が、他の人が見た時可読性が高い
 
 	x, y := "aaa", 123
 	fmt.Print(x, y)
 	fmt.Print("\n")
 	outer()
 
+	// GOは定義された変数は必ずプログラム上のどこかで使わないといけないルールになっている
 	fmt.Print("\n")
 	var aaa string
 	fmt.Print("\n")
