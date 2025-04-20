@@ -55,6 +55,7 @@ func integers() func() int {
 }
 
 func anything(a interface{}) {
+	fmt.Println(a)
 
 }
 func main() {
@@ -142,5 +143,64 @@ func main() {
 	}
 
 	// switch
+	n := 11
+	switch n {
+	case 1, 2:
+		fmt.Println(111)
+	case 3, 4:
+		fmt.Println(222)
+	case 11:
+		fmt.Println(333)
+	default:
+		fmt.Println(444)
 
+	}
+
+	switch n := 2; n { // switch文ないのみで参照可能な書き方
+	case 1:
+		fmt.Println(111)
+	case 2:
+		fmt.Println(222)
+	default:
+		fmt.Println(333)
+
+	}
+
+	n2 := 6
+	switch {
+	case n2 > 0 && n2 < 4:
+		fmt.Println("dasdasdsad")
+	case n2 > 3 && n2 < 7:
+		fmt.Println("dasdasdsaddasadasdas")
+	}
+
+	// switch　型スイッチ
+	anything(1)
+	anything(1)
+	anything(true)
+
+	// アサーションはただ型を判定してるだけのやつ。キャストみたいに変換はしていない
+	var x3 interface{} = 3
+	i3 := x3.(int) // 型のアサーション 変数.(復元したい型)でキャスト的なことができる
+	fmt.Println(i3 + 2)
+
+	f2, isFloat64 := x3.(float64) // 2つ目の変数には変換成功したかどうかのしんぎちが入る
+	fmt.Println(f2, isFloat64)
+
+	var x4 interface{} = "3"
+	if x4 == nil {
+		fmt.Println("None")
+	} else if i, isInt := x4.(int); isInt {
+		fmt.Println("x is int")
+		fmt.Println(i)
+	} else if s, isString := x4.(string); isString {
+		fmt.Println("x is string")
+		fmt.Println(s)
+	} else {
+		fmt.Println("i dont know")
+	}
+
+	var x5 interface{} = 5
+	i5, isInt := x5.(int)
+	fmt.Println(i5, isInt)
 }
