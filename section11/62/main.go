@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type User struct {
+type User struct { // これで構造体の定義ができる Goの struct は「TypeScriptの型定義」に近い
 	Name string
 	Age  int
 	// X, Y int
