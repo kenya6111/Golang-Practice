@@ -20,8 +20,8 @@ func main() {
 	ch1 := make(chan int, 2)
 	ch2 := make(chan string, 2)
 
-	ch1 <- 1
 	ch2 <- "A"
+	ch1 <- 1
 	ch1 <- 1
 	ch2 <- "B"
 
@@ -32,9 +32,9 @@ func main() {
 
 	select {
 	case v1 := <-ch1:
-		fmt.Println(v1 + 1000)
-	case v2 := <-ch2:
-		fmt.Println(v2 + "!?")
+		fmt.Println(v1 + 1000) // チャネル1にデータが入っていた場合はこっちが実行
+	case v2 := <-ch2: // ちなみに上のcaseが優先されるわけではなく、実行できるcaseが複数ある場合は、どのケースを実行できるかは「ランダム！！」
+		fmt.Println(v2 + "!?") // チャネル2にデータが入っていた場合はこっちが実行
 
 	default:
 		fmt.Println("どちらでもない")

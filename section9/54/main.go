@@ -5,7 +5,7 @@ import "fmt"
 // channel
 // 複数の後ルーチン間でのデータの受け渡しをするために設計されたデータ構造
 func main() {
-	var ch1 chan int // intのデータを保持できるチャネルを定義
+	var ch1 chan int // intのデータを保持できるチャネルを定義。送信受信共にできる
 
 	// var ch2 <-chan int // 受信専用のチャネルとして宣言
 	// var ch3 chan<- int // 送信専用として定義
@@ -16,7 +16,7 @@ func main() {
 	fmt.Println(cap(ch1))
 	fmt.Println(cap(ch2))
 
-	ch3 := make(chan int, 5)
+	ch3 := make(chan int, 5) // バッファサイズを指定できる
 	fmt.Println(cap(ch3))
 
 	fmt.Println("----")
@@ -38,5 +38,9 @@ func main() {
 	i3 := <-ch3
 	fmt.Println(i3)
 	fmt.Println("len:", len(ch3))
+
+	ch5 := make(chan int, 5)
+	ch5 <- 1
+	fmt.Println(len(ch5))
 
 }

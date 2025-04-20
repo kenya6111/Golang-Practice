@@ -7,7 +7,7 @@ import (
 
 func reciever(c chan int) {
 	for {
-		i := <-c
+		i := <-c // chaneelから値を受信する
 		fmt.Println(i)
 	}
 
@@ -28,8 +28,8 @@ func main() {
 	i := 0
 
 	for i < 100 {
-		ch1 <- i
-		ch2 <- i
+		ch1 <- i // チャネルに送る
+		ch2 <- i // チャネルに送る
 		time.Sleep(50 * time.Microsecond)
 		i++
 	}

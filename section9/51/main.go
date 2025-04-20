@@ -6,7 +6,13 @@ func main() {
 	var m = map[string]int{"a": 100, "b": 200}
 	fmt.Println(m)
 
+	var m_1 = map[int]int{1: 1, 2: 22, 3: 33}
+	fmt.Println(m_1)
+
 	m2 := map[string]int{"A": 100, "B": 200}
+	fmt.Println(m2)
+	m2["ooo"] = 2012
+	m2["ienene"] = 2012
 	fmt.Println(m2)
 
 	m3 := map[int]string{

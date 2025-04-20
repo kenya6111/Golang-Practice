@@ -14,4 +14,12 @@ func main() {
 
 	sl := []int{1, 2, 3}
 	fmt.Println(sum(sl...))
+
+	sl3 := []int{1, 2, 3, 4, 5, 6}
+
+	num := 0
+	for _, v := range sl3 {
+		num = num + v
+	}
+	fmt.Println(num)
 }

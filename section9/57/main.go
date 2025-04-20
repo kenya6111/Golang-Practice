@@ -4,18 +4,6 @@ import (
 	"fmt"
 )
 
-func reciever(name string, ch chan int) {
-	for {
-		i, ok := <-ch
-		if !ok {
-			break
-		}
-		fmt.Println(name, i)
-	}
-	fmt.Println(name + "END")
-
-}
-
 func main() {
 	ch1 := make(chan int, 3)
 
