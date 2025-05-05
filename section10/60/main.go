@@ -48,6 +48,42 @@ func main() {
 
 	fmt.Println(p3)  // アドレス表示 → 0xc000014090 とか
 	fmt.Println(*p3) // pが指してるxの中身 → 10
+
+	// 実験
+	nn := 200
+	fmt.Println(nn)
+	fmt.Println(&nn) // アドレス取得
+
+	var mm *int = &nn        //アドレスをmmに代入
+	fmt.Println("mm:", mm)   //mmにはアドレスが入っている
+	fmt.Println("*mm:", *mm) // アドレスの変数は「＊」で値を取得
+	fmt.Println(Test(nn))    //
+	fmt.Println(nn)
+	fmt.Println(Test2(mm))
+	fmt.Println(nn)
+
+	sl := []int{1, 2, 3, 4, 5}
+	Test3(sl)
+	fmt.Println(sl)
+
+}
+
+func Test(num int) int {
+	num = num * 2
+	return 2 * num
+}
+
+// アドレスを渡すことで元の値も更新する
+func Test2(num *int) int {
+	*num = *num * 2
+	return *num
+}
+
+// スライスなどの参照型はデフォルトで参照私となるため「＊」や「＆」などいちいち書かなくていい
+func Test3(sl []int) {
+	for i, v := range sl {
+		sl[i] = v * 2
+	}
 }
 
 // * は「ポインタ（＝アドレスを持ってる変数）」に使って、
