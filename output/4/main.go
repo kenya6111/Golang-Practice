@@ -2,21 +2,24 @@ package main
 
 import "fmt"
 
-var appConfig = Config{Env: "test"}
-
-type Config struct {
-	Env string
-}
-
-func getConfig() Config {
-	return appConfig
+type User struct {
+	Name string
+	Age  int
 }
 
 func main() {
-	c := getConfig()
-	c.Env = "production"
-	appConfig = c
+	users := []User{
+		{"tarou", 33},
+		{"zirou", 22},
+		{"itirou", 11},
+	}
 
-	fmt.Println(c.Env)         // production
-	fmt.Println(appConfig.Env) // testではなくproducionへ
+	for i, _ := range users {
+		fmt.Println(i)
+		users[i].Age = 44
+	}
+
+	fmt.Printf("%v", users) // どうなる？
+
+	// user は users の各要素のコピーにすぎず、user.Age = 44 はコピー側の Age を変更してるだけなため
 }
