@@ -20,4 +20,10 @@ func main() {
 	n := copy(sl2, sl) //第一引数はコピー先。第二引数はコピー元
 	fmt.Println(n, sl2)
 
+	sl3 := []int{1, 2, 3, 4, 5}
+	sl4 := sl3
+	sl4[0] = 111
+	fmt.Println(sl3)
+	fmt.Println(sl4)
+
 }

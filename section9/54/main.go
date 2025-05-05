@@ -20,15 +20,16 @@ func main() {
 	fmt.Println(cap(ch3))
 
 	fmt.Println("----")
-	ch3 <- 1              // チェネル３に一を送信するってことになる
-	fmt.Println(len(ch3)) // data 1つ送ったので1になる
+	ch3 <- 1                      // チェネル３に「1」を送信するってことになる
+	fmt.Println("len:", len(ch3)) // data 1つ送ったので1になる
 	ch3 <- 3
-	fmt.Println(len(ch3))
+	fmt.Println("len:", len(ch3))
 
 	ch3 <- 4
 	fmt.Println(ch3)
 	fmt.Println("len:", len(ch3))
 
+	fmt.Println("----------")
 	i := <-ch3
 	fmt.Println(i)
 	fmt.Println("len:", len(ch3))

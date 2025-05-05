@@ -22,4 +22,9 @@ func main() {
 		num = num + v
 	}
 	fmt.Println(num)
+
+	sl4 := []int{8, 8, 8, 8, 8}
+
+	fmt.Println(sum(sl4...))
+
 }
