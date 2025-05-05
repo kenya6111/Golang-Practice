@@ -59,24 +59,32 @@ func main() {
 
 	c := []byte("HI") // バイト配列に直す
 	fmt.Println(c)    // [72 73]が出力される
-
+	// "H" は ASCIIコード 72
+	// "I" は ASCIIコード 73
 	fmt.Println(string(c)) //
 
-	// GOの配列型は、あとから要素数を変更できない。増減できない サイズ変更したい場合はスライスを使う
+	fmt.Println("----------")
+	c2 := []byte("abc")
+	fmt.Println(c2)
+	fmt.Println(string(c2))
+
+	// GOの配列型
+	// あとから要素数を変更できない。増減できない。
+	// サイズ変更したい場合はスライスを使う
 	fmt.Println("----------")
 	var arr1 [3]int
 	fmt.Println(arr1)        // [0 0 0]
-	fmt.Printf("%T\n", arr1) // [3]int
+	fmt.Printf("%T\n", arr1) // [3]int ←これがデータ型になるので、要は「 [3]int 」でデータ型なので、サイズを変更できないというわけ。
 
 	var arr2 [3]string = [3]string{"A", "B"}
-	fmt.Println(arr2) // [A B ]
+	fmt.Println(arr2) // [A B ] 指定しない場合はその型の初期値＝ぜろ値がはいる
 
 	arr3 := [3]int{1, 2, 3}
 	fmt.Println(arr3) // [1 2 3]
 
-	arr4 := [...]string{"C", "D"}
-	fmt.Println(arr4)        // [C D]
-	fmt.Printf("%T\n", arr4) // [2]string
+	arr4 := [...]string{"C", "D"} // 要素数を自動で決定してくれる
+	fmt.Println(arr4)             // [C D]
+	fmt.Printf("%T\n", arr4)      // [2]string
 	fmt.Println(len(arr4))
 
 	fmt.Println(arr1[0]) // 0
@@ -87,10 +95,12 @@ func main() {
 
 	fmt.Println(len(arr1)) // 3
 
-	// 	配列型　＝　要素数を変更できない。
+	// 	配列型＝要素数を変更できない。
 
-	// スライス型　＝　要素数を変更可能。
-	var x interface{} // あらゆる型と互換性がある {}を含めて1つの型となっている
+	// スライス型＝要素数を変更可能。
+
+	var x interface{} // すべての型と互換性がある {}を含めて1つの型となっている
+	// インタフェースは「interface{}」で1つの型。波括弧まで含めて1つの型になっている
 	fmt.Println("---")
 	fmt.Println(x)
 	fmt.Println(x) // nil 初期値はnilとなっておりpythonでいうところのNoneになる。
@@ -126,4 +136,10 @@ func main() {
 	fmt.Printf("%T\n", i) // int
 	fmt.Print(i)          // 100
 
+	var h string = "hello world"
+	b := []byte(h)
+	fmt.Println(b)
+
+	h2 := string(b)
+	fmt.Println(h2)
 }
