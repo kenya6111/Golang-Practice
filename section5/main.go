@@ -26,6 +26,8 @@ const (
 	c3
 )
 
+const aaa = 10
+
 func main() {
 	fmt.Println(Pi)
 	fmt.Println(URL)
@@ -33,5 +35,6 @@ func main() {
 	fmt.Println(A, B, C, D, E, F)
 
 	fmt.Println(c0, c1, c2)
+	fmt.Println(aaa)
 
 }
