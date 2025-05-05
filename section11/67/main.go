@@ -9,6 +9,7 @@ type User struct {
 
 type Users []*User
 
+// mapのキーやバリューにも構造体を使えるよってだけの話。
 func main() {
 	m := map[int]User{
 		1: {Name: "user1", Age: 20},

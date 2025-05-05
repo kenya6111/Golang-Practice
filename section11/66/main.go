@@ -7,7 +7,8 @@ type User struct {
 	Age  int
 }
 
-type Users []*User
+// structのスライス！！
+type Users []*User // ここ！ ポインタのUser型をスライスとして格納できる型
 
 func main() {
 	user1 := User{Name: "user1", Age: 10}

@@ -14,8 +14,8 @@ func UpdateUser(user User) {
 }
 
 func UpdateUser2(user *User) {
-	user.Name = "A"
-	user.Age = 1000
+	user.Name = "TEST"
+	user.Age = 9999
 }
 func main() {
 	// 構造体はクラスのような存在。複数の任意の型の値を1つにまとめたもの。
@@ -41,11 +41,16 @@ func main() {
 	user6 := User{Name: "usr6"}
 	fmt.Println(user6)
 
+	fmt.Println("---")
 	user7 := new(User) // newで定義した変数は構造体のポインタ型をかえす
 	fmt.Println(user7)
+	fmt.Println(*user7)
 
-	user8 := &User{} // アドレス演算子でもポインタ型で宣言できる
+	fmt.Println("---")
+	user8 := &User{Name: "aaa"} // アドレス演算子でもポインタ型で宣言できる
 	fmt.Println(user8)
+	fmt.Println(*user8)
+	fmt.Println("---")
 
 	UpdateUser(user1)
 	UpdateUser2(user8)
