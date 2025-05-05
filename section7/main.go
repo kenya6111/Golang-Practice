@@ -102,4 +102,44 @@ func main() {
 	fmt.Println(ints())
 	fmt.Println(ints())
 
+	fmt.Println("-----")
+	fmt.Println(aaa(1, 2))
+	fmt.Println(bbb(2, 2))
+	fmt.Println(ccc(5, 2))
+	x, _ := ccc(6, 6)
+	fmt.Println(x)
+
+	ff := func(x, y int) int {
+		return x + y
+	}
+	fmt.Println(ff(1, 2))
+	ii := func(x, y int) int {
+		return x + y
+	}(1, 2)
+
+	fmt.Println(ii)
+
+	fff := ddd()
+	fmt.Println(fff(1, 2))
+
+}
+
+func aaa(x, y int) int {
+	return x + y
+}
+
+func bbb(x, y int) (result int) {
+	result = x + y
+
+	return
+}
+
+func ccc(x, y int) (int, int) {
+	return x, y
+}
+
+func ddd() func(int, int) int {
+	return func(x, y int) int {
+		return x + y
+	}
 }
