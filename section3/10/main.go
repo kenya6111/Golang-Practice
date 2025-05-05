@@ -17,6 +17,9 @@ func main() {
 	var t, f bool = true, false
 	fmt.Println(t, f)
 
+	var t2, f2 = true, true
+	fmt.Println(t2, f2)
+
 	var ( // 異なる型で定義する
 		i2 int    = 200
 		s2 string = "golung"
@@ -27,6 +30,10 @@ func main() {
 	var i3 int
 	var s3 string
 	fmt.Println(i3, s3) // 値を定義しないと、各型の初期値が入る
+
+	var i3_2 int
+	var s3_2 string
+	fmt.Println(i3_2, s3_2) // 値を定義しないと、各型の初期値が入る
 
 	i3 = 300
 	s3 = "re go"
@@ -42,6 +49,8 @@ func main() {
 
 	i4 = 450
 	fmt.Println(i4)
+
+	// i4 := 200 :=で更新はできない
 
 	// 基本的には明示的な型指定をする明示的な定義を使った方が良いとされている
 	// 型指定をすることでバグを抑えるように元々設計された言語なので。
@@ -73,6 +82,7 @@ func main() {
 	// := を使う場合
 	//   関数の中でローカル変数を素早く宣言・初期化したいときに便利。
 	//   型推論でスッキリ書ける。
+	//   関数内でしか使えない
 
 	// var を使う場合
 	//   関数外(パッケージスコープ) では := が使えないので必須。
