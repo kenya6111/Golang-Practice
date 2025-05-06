@@ -13,7 +13,7 @@ func main() {
 
 	// _, err := os.Open("aa.txt")
 	// if err != nil {
-	// 	log.Fatalln(err)
+	// 	log.Fatalln(err)aa
 	// }
 
 	// fmt.Println(os.Args[0])
