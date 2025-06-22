@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var count int
-	var lock sync.Mutex
+	var lock sync.RWMutex
 	var wg sync.WaitGroup
 
 	increment := func(wg *sync.WaitGroup, l sync.Locker){
@@ -42,7 +42,7 @@ func main() {
 	fmt.Println("------こっからread-------")
 	for i :=0; i < 5; i++ {
 		wg.Add(1)
-		go read(&wg, &lock)
+		go read(&wg, lock.RLocker())
 	}
 
 	wg.Wait()
