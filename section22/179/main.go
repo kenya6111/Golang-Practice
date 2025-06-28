@@ -25,10 +25,6 @@ func main() {
 	time.Sleep(time.Second)
 	fmt.Println("Go!")
 
-	// for i := 0; i<3 ;i++{
-	// 	time.Sleep(time.Second)
-	// 	cond.Signal()
-	// }
 
 	cond.Broadcast()
 
