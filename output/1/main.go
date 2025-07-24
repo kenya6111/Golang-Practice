@@ -2,25 +2,25 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 	"strconv"
 )
 
 func main() {
-	// sl := []interface{}{1, "2", 10, "11"}// interface型は、「interface{}」と書くので、先はNG。
-	sl := []interface{}{1, "2", 10, "11"}
+	sl := []interface{}{1, "2", 10, "11", "abc", true}
 	for _, v := range sl {
+		switch value := v.(type) {
+		case int:
+			fmt.Printf("%02d\n", v)
+		case string:
+			if i, err := strconv.Atoi(value); err == nil {
+				fmt.Printf("%02d\n", i)
+			} else {
 
-		// fmt.Printf("%T\n", v)
-		rv := reflect.ValueOf(v)
-		if rv.Kind() == reflect.String {
-			// fmt.Printf("%02d\n", v)
+				fmt.Printf("変換エラー: '%s' は数値ではありません\n", v)
+			}
+		default:
+			fmt.Printf("データ型エラー: %Tは未対応のデータ型です\n", v)
 
-			i, _ := strconv.Atoi(v.(string))
-			fmt.Printf("%02d\n", i)
-		}
-		if rv.Kind() == reflect.Int {
-			fmt.Println(v)
 		}
 	}
 }
