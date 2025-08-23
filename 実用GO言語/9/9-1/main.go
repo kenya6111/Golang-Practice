@@ -57,7 +57,7 @@ func Test_9_1() {
 			userID, email string
 			userName      sql.NullString
 		)
-
+		fmt.Println(1)
 		if err := rows.Scan(&userID, &userName, &email); err != nil {
 			log.Fatalf("scan the user: %v", err)
 		}
