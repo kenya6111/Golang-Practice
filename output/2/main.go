@@ -8,33 +8,30 @@ import (
 func findKeyByValue(m map[int]string, val string) (int, error) {
 	for k, v := range m {
 
-		if val == v {
+		if v == val {
 			return k, nil
 		}
 	}
-	return 0, errors.New("error!!!!!")
+	return 0, errors.New("対応するキーはありません。")
 }
+
 func main() {
 	m := map[int]string{
 		1: "01",
 		2: "02",
 		3: "03",
 	}
-	// fmt.Println(findKeyByValue(m, "01"))
 
-	key, err := findKeyByValue(m, "03") // key→3, err→nil
-	fmt.Println("key", key)
-	fmt.Println("err", err)
-
+	key, err := findKeyByValue(m, "03")
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(key)
+		fmt.Printf("key→%v, err→%v\n",key,err)
 	}
-	key2, err2 := findKeyByValue(m, "05") // key→0にすること(初期値なので), errはある
+	key2, err2 := findKeyByValue(m, "05")
 	if err2 != nil {
 		fmt.Println(err2)
 	} else {
-		fmt.Println(key2)
+		fmt.Printf("key→%v, err→%v",key2,err)
 	}
 }

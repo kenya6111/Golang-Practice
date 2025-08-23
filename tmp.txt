@@ -1,0 +1,8 @@
+
+
+pluginでdisableにしたやつもどす
+
+shif command p
+
+
+- 

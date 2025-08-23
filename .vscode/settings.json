@@ -1,0 +1,7 @@
+{
+  "html.autoClosingTags": false,
+  "editor.autoClosingTags": "never",
+  "emmet.includeLanguages": {},
+  "emmet.triggerExpansionOnTab": false,
+  "editor.formatOnSave": false
+}

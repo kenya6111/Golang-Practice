@@ -218,3 +218,16 @@
 	// 型指定をすることでバグを抑えるように元々設計された言語なので。
 
 
+
+func (t Time) Year() int の (t Time) は レシーバ（receiver） と呼ばれます。
+Go ではメソッドを「どの型にぶら下げるか」を明示するために、関数の先頭に (変数名 型) を付けます。
+
+func (t Time) Year() int { … }
+Time 型に Year というメソッド を定義する。
+
+メソッド内で t という名前で受け取るのは呼び出し元の値（コピー）。
+
+呼び出しは someTime.Year() の形になる。
+内部では Go が Year(someTime) のように変換して呼んでいるだけ。
+
+https://cs.opensource.google/go/go/+/refs/tags/go1.24.3:src/time/time.go;l=140#:~:text=//%20clock%20reading.-,type%20Time%20struct%20%7B,-//%20wall%20and%20ext

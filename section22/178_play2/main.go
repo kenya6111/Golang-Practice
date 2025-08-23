@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	var rw sync.RWMutex
+	var rw sync.Mutex
 	var wg sync.WaitGroup
 
 	read := func(id int) {
 		defer wg.Done()
-		rw.RLock()
-		defer rw.RUnlock()
+		rw.Lock()
+		defer rw.Unlock()
 
 		fmt.Printf("👀 Reader %d: start\n", id)
 		time.Sleep(1 * time.Second)

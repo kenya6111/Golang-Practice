@@ -34,20 +34,28 @@ func main() {
 
 	// var count int
 
-	// wg.Add(2)
+	// wg.Add(4)
 
 	// go func() {
 	// 	defer wg.Done()
-	// 	count++ // A
+	// 	count++
 	// }()
 
 	// go func() {
 	// 	defer wg.Done()
-	// 	count++ // B
+	// 	count++
+	// }()
+	// go func() {
+	// 	defer wg.Done()
+	// 	count++
+	// }()
+	// go func() {
+	// 	defer wg.Done()
+	// 	count++
 	// }()
 	
 	// wg.Wait()
-	// fmt.Println(count)
+	// fmt.Println(count)// たまに３になる。これが競合
 }
 
 // 競合状態
