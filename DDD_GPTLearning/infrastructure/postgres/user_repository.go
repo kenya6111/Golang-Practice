@@ -2,7 +2,7 @@ package postgres
 
 import (
 	"database/sql"
-	domain "ddd_gpt_learning/domain/user"
+	"ddd_gpt_learning/domain/user"
 	"fmt"
 )
 
@@ -16,7 +16,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 	}
 }
 
-func (r *UserRepository) Save(u *domain.User) error {
+func (r *UserRepository) Save(u *user.User) error {
 	query := `INSERT INTO users (id, username, email, created_at, updated_at)
 		VALUES ($1, $2, $3, $4, $5)`
 
@@ -27,16 +27,16 @@ func (r *UserRepository) Save(u *domain.User) error {
 	return nil
 }
 
-func (r *UserRepository) FindAll() ([]*domain.User, error) {
+func (r *UserRepository) FindAll() ([]*user.User, error) {
 	rows, err := r.db.Query(`SELECT id, username, email, created_at, updated_at FROM users`)
 	if err != nil {
 		return nil, fmt.Errorf("failed to select users: %w", err)
 	}
 	defer rows.Close()
 
-	var users []*domain.User
+	var users []*user.User
 	for rows.Next() {
-		u := &domain.User{}
+		u := &user.User{}
 		err := rows.Scan(&u.ID, &u.Username, &u.Email, &u.CreatedAt, &u.UpdatedAt)
 		if err != nil {
 			return nil, err

@@ -56,3 +56,86 @@ TweetRepository → ツイートを保存・取得する
 
 リポジトリは「DBテーブルに直接対応する」というより、
 「エンティティを永続化するための抽象インターフェース」って感じ。
+
+
+
+#### user_service.goがDB実装に依存してる
+usecaseは本来DBを知らなくてもいいのに知っている。
+
+```go
+type UserService struct {
+    repo *postgres.UserRepository  // ← ここが具体的型
+}
+```
+これはアプリケーション層がインフラ層に依存している
+
+
+「もし MySQL で保存したい」となったら UserService を書き換えないといけない。
+DB処理をモック化してテストするのも難しい。
+
+DDDの原則に照らすと
+
+ドメイン層：ビジネスルールの中心（エンティティ・値オブジェクト・リポジトリのインターフェース）
+
+アプリケーション層：ユースケースを組み立てる（インターフェースを使うだけ）
+
+インフラ層：実装詳細（PostgresやMySQL）はここに押し込める
+
+
+#### postgres ってディレクトリ名にしてあるのは「これはPostgresに依存する実装ですよっていう意味
+infrastructure/
+├── postgres/
+│   └── user_repository.go   // Postgres専用の実装
+
+確かに、dbがpostgresなので依存してる
+```go
+package postgres
+
+import (
+	"database/sql"
+	"ddd_gpt_learning/domain/user"
+	"fmt"
+)
+
+type UserRepository struct {
+	db *sql.DB
+}
+
+func NewUserRepository(db *sql.DB) *UserRepository {
+	return &UserRepository{
+		db: db,
+	}
+}
+```
+
+理解した。
+```txt
+あーーーなるほど、postgres以外のDBを使った時に（例えばmysqlとか、）新たに、infradtructure/mysqlってディレクトリきってそこにuserRepository.goって作るから、その場合そのuserRepositoryは
+type UserRepository struct {
+	db *sql.DB
+}
+
+func NewUserRepository(db *sql.DB) *UserRepository {
+	return &UserRepository{
+		db: db,
+	}
+}
+ってなっててmysqlを持つから、
+
+そうなった時にユースケースが
+
+type UserService struct {
+	repo *postgres.UserRepository
+}
+
+func NewUserService(repo *postgres.UserRepository) *UserService {
+	return &UserService{
+		repo: repo,
+	}
+}
+
+ってなってると、mysqlのリポジトリ使いたい時に、UserServiceも修正入れなきゃいけなくなるので、
+userServiceをpostgresに依存させるんじゃなくて、
+interfaceに依存させることで、
+mysqlとかのリポジトリが増えた時に、修正が楽ってことか。
+```

@@ -1,22 +1,21 @@
 package application
 
 import (
-	domain "ddd_gpt_learning/domain/user"
-	"ddd_gpt_learning/infrastructure/postgres"
+	"ddd_gpt_learning/domain/user"
 )
 
 type UserService struct {
-	repo *postgres.UserRepository
+	repo user.Repository
 }
 
-func NewUserService(repo *postgres.UserRepository) *UserService {
+func NewUserService(repo user.Repository) *UserService {
 	return &UserService{
 		repo: repo,
 	}
 }
 
-func (s *UserService) ResisterUser(username, email string) (*domain.User, error) {
-	u := domain.NewUser(username, email)
+func (s *UserService) ResisterUser(username, email string) (*user.User, error) {
+	u := user.NewUser(username, email)
 	if err := s.repo.Save(u); err != nil {
 		return nil, err
 	}
@@ -24,6 +23,6 @@ func (s *UserService) ResisterUser(username, email string) (*domain.User, error)
 }
 
 // GetUsers ユーザー一覧を取得するユースケース
-func (s *UserService) GetUsers() ([]*domain.User, error) {
+func (s *UserService) GetUsers() ([]*user.User, error) {
 	return s.repo.FindAll()
 }
