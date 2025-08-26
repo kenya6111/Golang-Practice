@@ -19,9 +19,10 @@ func (s *Service) updateUser(ctx context.Context, userId int, userName string) e
 	if err != nil {
 		return err
 	}
+	defer tx.Rollback() // deferは関数を抜ける際に必ず呼ばれるが、コミットされていた場合はcommit()のなかでtx.Closeされるので、実質的にロールバックは無視される
 
 	if _, err = tx.ExecContext(ctx, "update users set username = $1 where id =1", userName); err != nil {
-		tx.Rollback()
+		// tx.Rollback() ← ゴミ実装: 毎回クエリ実行後のエラーチェック内でtx.rollbackと書くのはNG
 		return err
 	}
 	return tx.Commit()
@@ -56,10 +57,5 @@ func Test_9_2() {
 	if err2 != nil {
 		fmt.Println(err)
 	}
-
-	err = db.Ping()
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	fmt.Println("コミット完了")
 }
