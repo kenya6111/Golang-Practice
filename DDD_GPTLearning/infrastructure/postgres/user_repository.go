@@ -20,7 +20,7 @@ func (r *UserRepository) Save(u *user.User) error {
 	query := `INSERT INTO users (id, username, email, created_at, updated_at)
 		VALUES ($1, $2, $3, $4, $5)`
 
-	_, err := r.db.Exec(query, u.ID, u.Username, u.Email, u.CreatedAt, u.UpdatedAt)
+	_, err := r.db.Exec(query, u.ID, u.Username, u.Email.String(), u.CreatedAt, u.UpdatedAt)
 	if err != nil {
 		return fmt.Errorf("failed to insert user: %w", err)
 	}

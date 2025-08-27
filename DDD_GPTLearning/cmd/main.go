@@ -26,7 +26,7 @@ func main() {
 	// ユースケース: 登録
 	newUser, err := service.ResisterUser("kenya_service", "kenya_service@example.com")
 	if err != nil {
-		log.Fatal("insert error:", err)
+		log.Fatal("【insert error】:", err)
 	}
 	fmt.Println("新規ユーザーを保存しました:", newUser)
 

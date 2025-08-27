@@ -9,19 +9,24 @@ import (
 type User struct {
 	ID        string
 	Username  string
-	Email     string
+	Email     Email
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
-func NewUser(username, email string) *User {
+func NewUser(username, email string) (*User, error) {
+	mail, err := NewEmail(email)
+	if err != nil {
+		return nil, err
+	}
+
 	return &User{
 		ID:        uuid.NewString(),
 		Username:  username,
-		Email:     email,
+		Email:     mail,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
-	}
+	}, nil
 }
 
 func (u *User) ChangeUsername(newName string) {

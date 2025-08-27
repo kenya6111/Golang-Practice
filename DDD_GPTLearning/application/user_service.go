@@ -15,7 +15,10 @@ func NewUserService(repo user.Repository) *UserService {
 }
 
 func (s *UserService) ResisterUser(username, email string) (*user.User, error) {
-	u := user.NewUser(username, email)
+	u, err := user.NewUser(username, email)
+	if err != nil {
+		return nil, err
+	}
 	if err := s.repo.Save(u); err != nil {
 		return nil, err
 	}
