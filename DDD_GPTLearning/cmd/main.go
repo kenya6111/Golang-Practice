@@ -1,8 +1,8 @@
 package main
 
 import (
-	"database/sql"
 	"ddd_gpt_learning/application"
+	"ddd_gpt_learning/infrastructure/config"
 	"ddd_gpt_learning/infrastructure/postgres"
 	"fmt"
 	"log"
@@ -12,8 +12,7 @@ import (
 
 func main() {
 	// DB接続
-	connStr := "host=localhost port=5435 user=root password=password dbname=mydb sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := config.NewDB()
 	if err != nil {
 		log.Fatal("failed to connect db:", err)
 	}
