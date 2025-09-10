@@ -101,7 +101,77 @@ class ModelNumber
 
 なのでインスタンス生成時に「this.value=value」の前に「if(value.length()>3)」のようなチェック処理を入れておけば良い
 
+**不正な値は遅効性の毒みたいなもの**
+
 - ロジックの散在を防ぐ
 オブジェクトのユーザ名3文字以上というチェックは、userオブジェクトのインスタンス化の箇所のみに書いておいて
 ユーザの新規作成の時はそのインスタンス化処理を使うのでチェックがしっかりされるし、更新の時も、「値は不変」の原則からユーザオブジェクトを更新したい値で新規作成、つまりインスタンス化して「代入」するので、更新する時もユーザ名チェックがされて良い。
 つまりは「値は不変」。更新の時は置き換え。という原則を守ればいい。
+
+
+
+#### GOでの説明
+DDDでは 「同一性（ID）」を持たず、値そのものが等しければ同一とみなせるオブジェクト を 値オブジェクト と呼びます。
+
+voと略されがち
+
+特徴
+
+- IDを持たない
+  - エンティティのように一意な識別子が不要
+  - 値が同じなら同一とみなせる
+
+- 不変（Immutable）であることが望ましい
+  - 値オブジェクトは生成後に変更しない
+  - 変更が必要なら新しいインスタンスを作る
+
+- 概念を表現する
+  - 単なるプリミティブ型（string, intなど）ではなく、意味を持った型 にする
+
+
+```go
+package user
+
+import (
+    "errors"
+    "regexp"
+)
+
+type Email struct {
+    value string
+}
+
+// コンストラクタ（不正な値は作れない）
+func NewEmail(value string) (Email, error) {
+    if !isValidEmail(value) {
+        return Email{}, errors.New("invalid email format")
+    }
+    return Email{value: value}, nil
+}
+
+func (e Email) String() string {
+    return e.value
+}
+
+// 値が同じなら同一とみなす
+func (e Email) Equals(other Email) bool {
+    return e.value == other.value
+}
+
+func isValidEmail(email string) bool {
+    re := regexp.MustCompile(`^[^@\s]+@[^@\s]+\.[^@\s]+$`)
+    return re.MatchString(email)
+}
+
+```
+
+```txt
+表現力が増す
+  string や int ではなく、Email や Money という型でドメインの意味を直接表現できる
+
+不変性で安全
+  値の整合性が保たれる
+
+バリデーションを閉じ込められる
+  VOのコンストラクタ内で不正値を防げる
+```
