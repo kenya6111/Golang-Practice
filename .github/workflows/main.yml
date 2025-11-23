@@ -19,3 +19,16 @@ jobs:
       - run: echo "gomennasai!!"
       - run: echo "hajimemashite!!"
       - run: echo "dotirasamadesuka!!"
+  named_steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "さよならの挨拶"
+        run: echo "sayonara!!"
+      - name: "ありがとうの言葉"
+        run: echo "arigato!!"
+      - name: "謝罪"
+        run: echo "gomennasai!!"
+      - name: "初めましての挨拶"
+        run: echo "hajimemashite!!"
+      - name: "困惑"
+        run: echo "dotirasamadesuka!!"
