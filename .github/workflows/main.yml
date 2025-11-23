@@ -11,3 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "sayonara!!"
+  multiple_steps:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "sayonara!!"
+      - run: echo "arigato!!"
+      - run: echo "gomennasai!!"
+      - run: echo "hajimemashite!!"
+      - run: echo "dotirasamadesuka!!"
